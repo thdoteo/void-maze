@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>VoidMaze -> World editor</title>
+	<meta charset="utf8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="icon" type="image/png" href="ressources/images/player.png" />
+	<style>
+		@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html, body {
+			margin: 0;
+			height: 100%;
+			min-height: 100%;
+
+			font-family: 'Open Sans', Verdana, sans-serif;
+
+			/*background: linear-gradient(to bottom, #c6eeff 0%,#c9efff 100%);*/
+			/*background: linear-gradient(to bottom, #c6eeff 0%, #c6eeff 25%, #fff6e1 100%);*/
+			background: linear-gradient(to bottom, #b9d0e5 0%, #bfd8ef 100%);
+			/*background: linear-gradient(to bottom, #42566d 0%, #bbe1ff 100%);*/
+			/*background: linear-gradient(to bottom, #37476a 0%, #b6ccff 100%);*/
+			/*background: linear-gradient(to bottom, #82addb 0%, #fadbdb 100%);*/
+
+			overflow: hidden;
+		}
+
+		canvas { display: none; }
+
+		.message {
+			padding: 24px 32px;
+
+			background: #fff;
+			box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.2);
+		}
+
+		#block {
+			display: none;
+			position: absolute;
+			top: 25px; left: 25px;
+
+			width: 515px;
+			padding-top: 22px;
+			padding-bottom: 26px;
+		}
+		#block-actions {
+			margin-top: 20px;
+		}
+		#block-name { display: block; margin-bottom: 13px; padding: 6px 10px; font-size: 16px; }
+		#block-icon { width: 24px; position: relative; top: 6px; margin-right: 10px; }
+		#block-remove { cursor: pointer; color: #E74C3C; margin-left: 15px; position: relative; top: 1px; }
+		#block-add { cursor: pointer; color: #2C3E50; }
+		#block-export { cursor: pointer; color: #27AE60; margin-left: 10px; }
+	</style>
+</head>
+<body>
+
+	<!-- canvas -->
+
+	<div class="message" id="block">
+		<input id="block-name" type="text" placeholder="World's name">
+		<img id="block-icon" src="ressources/images/player.png" alt="block-icon">
+		<span id="block-text">Block,</span>
+		<span id="block-coords"></span>
+		<span id="block-axis"></span>
+		<span id="block-remove">Remove.</span>
+		<div id="block-actions">
+			<span id="block-add">Add an obstacle.</span>
+			<span id="block-export">Export world to the clipboard.</span>
+		</div>
+	</div>
+
+	<script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.min.js"></script>
+
+	<script src="libs/stats.min.js"></script>
+	<script src="libs/tween.js"></script>
+	<script src="libs/keyboard.min.js"></script>
+	<script src="libs/threex.domevents.js"></script>
+
+	<script src="worldeditor.js"></script>
+	<script>
+		var editorInstance = new Editor();
+	</script>
+</body>
+</html>

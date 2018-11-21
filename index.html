@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>VoidMaze</title>
+	<link rel="icon" type="image/png" href="tscraft-icon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<style>
+		@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html, body {
+			margin: 0;
+			height: 100%;
+			min-height: 100%;
+
+			font-family: 'Open Sans', Verdana, sans-serif;
+
+			background: linear-gradient(to bottom, #c6eeff 0%,#c9efff 100%);
+			/*background: linear-gradient(to bottom, #c6eeff 0%, #c6eeff 25%, #fff6e1 100%);*/
+			/*background: linear-gradient(to bottom, #b9d0e5 0%, #bfd8ef 100%);*/
+			/*background: linear-gradient(to bottom, #42566d 0%, #bbe1ff 100%);*/
+			/*background: linear-gradient(to bottom, #37476a 0%, #b6ccff 100%);*/
+			/*background: linear-gradient(to bottom, #82addb 0%, #fadbdb 100%);*/
+
+			overflow: hidden;
+		}
+
+		canvas { display: none; }
+
+		.message {
+			padding: 24px 32px;
+
+			background: #fff;
+			box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.2);
+		}
+
+		#world {
+			display: none;
+			position: absolute;
+			top: 25px; left: 25px;
+
+			width: 300px;
+			padding-top: 22px;
+			padding-bottom: 26px;
+
+			text-align: center;
+		}
+		#world-icon { width: 24px; position: relative; top: 6px; left: -10px; }
+
+		#win, #lose {
+			display: none;
+			position: absolute;
+			top: 102px; left: 25px;
+			width: 300px;
+			min-height: 30px;
+			padding-left: 30px;
+
+			color: #fff;
+			text-align: center;
+
+			background: #ffd477;
+		}
+		#lose { background: #7b9dcc; }
+
+		#demo {
+			display: none;
+			position: absolute;
+			bottom: 25px; right: 25px;
+
+			width: 400px;
+			min-height: 80px;
+
+			font-size: 15px;
+		}
+
+		.demo-text {
+			margin-bottom: 24px;
+		}
+
+		.step {
+			margin: 16px 0px;
+		}
+		.step:last-of-type {
+			margin-bottom: 10px;
+		}
+
+		.step-number {
+			display: inline-block;
+			width: 28px; height: 28px;
+			margin-right: 10px;
+			padding-top: 6px;
+
+			color: white;
+			font-size: 12px;
+			text-align: center;
+
+			border-radius: 100%;
+
+			background: #97E0FF;
+		}
+
+		.step-text {
+			display: inline-block;
+			vertical-align: top;
+			width: 80%;
+		}
+
+	</style>
+</head>
+<body>
+
+	<!-- canvas -->
+
+	<div class="message" id="world">
+		<img id="world-icon" src="ressources/images/player.png" alt="world-icon">
+		<span id="world-text">World -> </span>
+		<span id="world-number"></span>
+	</div>
+
+	<div class="message" id="win">You win !</div>
+	<div class="message" id="lose">You lose !</div>
+	
+	<div class="message" id="demo">
+		<div class="demo-text">It's the first time you play here ? Here is a guide to learn how to play the game.</div>
+		<div class="step" id="step0">
+			<div class="step-number">0</div>
+			<div class="step-text">Move the mouse to see the game from different angles.</div>
+		</div>
+		<div class="step" id="step1">
+			<div class="step-number">1</div>
+			<div class="step-text">Press the right arrow of your keyboard.</div>
+		</div>
+		<div class="step" id="step2">
+			<div class="step-number">2</div>
+			<div class="step-text">Then press the up arrow. Gray blocks stop your infinite movement.</div>
+		</div>
+		<div class="step" id="step3">
+			<div class="step-number">3</div>
+			<div class="step-text">Now, press the spacebar... It allows you to go in 6 directions !</div>
+		</div>
+		<div class="step" id="step4">
+			<div class="step-number">4</div>
+			<div class="step-text">Finally press the left arrow to go to the goal !</div>
+		</div>
+	</div>
+
+	<script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.min.js"></script>
+
+	<script src="libs/stats.min.js"></script>
+	<script src="libs/tween.js"></script>
+	<script src="libs/keyboard.min.js"></script>
+	<script src="libs/jquery.color.js"></script>
+
+	<script src="core.js"></script>
+	<script>
+		var gameInstance = new Game();
+	</script>
+</body>
+</html>

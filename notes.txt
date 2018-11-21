@@ -1,0 +1,162 @@
+SINGLETON
+	// if (typeof game.instance === 'object') { return game.instance; }
+	// this.instance = this;
+
+
+
+
+BOUNCE PLAYER
+// new TWEEN.Tween(this.block.object.position).to(step1, 50).easing(TWEEN.Easing.Linear.None).start().onComplete(function() {
+// new TWEEN.Tween(self.block.object.position).to(step2, 150).easing(TWEEN.Easing.Linear.None).start().onComplete(function() {
+			
+
+
+
+DELTATIME
+// this.temp.currentTime = Date.now();
+	// this.temp.deltatime = this.temp.currentTime - this.temp.lastTimeBeforeLoop;
+	// this.temp.lastTimeBeforeLoop = this.temp.currentTime;
+	//* (this.temp.deltatime / duration)
+
+
+
+
+
+
+
+World.prototype.checkBlocksCollision = function(block) {
+	var collision = false;
+	var blockX = block.getCoordinates().x * this.game.config.blockSize; var blockY = block.getCoordinates().y * this.game.config.blockSize; var blockZ = block.getCoordinates().z * this.game.config.blockSize;
+	
+	for(var i = 0; i < this.blocks.length; i++) {
+		var sameX = blockX == this.blocks[i].getCoordinates().x * this.game.config.blockSize;
+		var sameY = blockY == this.blocks[i].getCoordinates().y * this.game.config.blockSize;
+		var sameZ = blockZ == this.blocks[i].getCoordinates().z * this.game.config.blockSize;
+
+		if(this.game.player.moving.direction == 'up' && blockY == this.blocks[i].getCoordinates().y * this.game.config.blockSize - this.game.config.blockSize && sameX && sameZ) {
+			collision = this.blocks[i].type;
+		} else if(this.game.player.moving.direction == 'down' && blockY == this.blocks[i].getCoordinates().y * this.game.config.blockSize + this.game.config.blockSize && sameX && sameZ) {
+			collision = this.blocks[i].type;
+		}
+		else if(this.game.player.moving.direction == 'left') {
+			if(this.game.player.moving.axis == 'X' && blockX == this.blocks[i].getCoordinates().x * this.game.config.blockSize + this.game.config.blockSize && sameY && sameZ) {
+				collision = this.blocks[i].type;
+			} else if(this.game.player.moving.axis == 'Z' && blockZ == this.blocks[i].getCoordinates().z * this.game.config.blockSize + this.game.config.blockSize && sameX && sameY) {
+				collision = this.blocks[i].type;
+			}
+		}
+		else if(this.game.player.moving.direction == 'right') {
+			if(this.game.player.moving.axis == 'X' && blockX == this.blocks[i].getCoordinates().x * this.game.config.blockSize - this.game.config.blockSize && sameY && sameZ) {
+				collision = this.blocks[i].type;
+			} else if(this.game.player.moving.axis == 'Z' && blockZ == this.blocks[i].getCoordinates().z * this.game.config.blockSize - this.game.config.blockSize && sameX && sameY) {
+				collision = this.blocks[i].type;
+			}
+		}
+	}
+	return collision;
+}
+
+
+
+
+
+
+
+
+
+
+
+this.clock = new THREE.Clock();
+
+	// this.redParticleGroup = new SPE.Group({texture: THREE.ImageUtils.loadTexture("ressources/images/redParticle.png"), transparent: false});
+	// this.greenParticleGroup = new SPE.Group({texture: THREE.ImageUtils.loadTexture("ressources/images/greenParticle.png"), transparent: false});
+	this.blueParticleGroup = new SPE.Group({texture: THREE.ImageUtils.loadTexture("ressources/images/blueParticle.png"), transparent: false});
+
+	// this.redParticleEmitter = new SPE.Emitter({
+	// 	duration: 5,
+ //        maxAge: {
+ //            value: 6
+ //        },
+	// 	position: {
+ //            value: new THREE.Vector3(0, 40, 10),
+ //            spread: new THREE.Vector3(60, 0, 60)
+ //        },
+	// 	acceleration: {
+ //            value: new THREE.Vector3(0, -10, 0),
+ //            spread: new THREE.Vector3( 10, 0, 10 )
+ //        },
+	// 	velocity: {
+ //            value: new THREE.Vector3(0, -50, 0),
+ //            spread: new THREE.Vector3(0, 0, 0)
+ //        },
+ //        size: {
+ //            value: [4, 3]
+ //        },
+	// 	particleCount: 30
+	// });
+	// this.greenParticleEmitter = new SPE.Emitter({
+	// 	duration: 5,
+ //        maxAge: {
+ //            value: 6
+ //        },
+	// 	position: {
+ //            value: new THREE.Vector3(0, 40, 10),
+ //            spread: new THREE.Vector3(60, 0, 60)
+ //        },
+	// 	acceleration: {
+ //            value: new THREE.Vector3(0, -10, 0),
+ //            spread: new THREE.Vector3( 10, 0, 10 )
+ //        },
+	// 	velocity: {
+ //            value: new THREE.Vector3(0, -50, 0),
+ //            spread: new THREE.Vector3(0, 0, 0)
+ //        },
+ //        size: {
+ //            value: [4, 3]
+ //        },
+	// 	particleCount: 30
+	// });
+	this.blueParticleEmitter = new SPE.Emitter({
+		duration: 5,
+        maxAge: {
+            value: 6
+        },
+		position: {
+            value: new THREE.Vector3(0, 40, 10),
+            spread: new THREE.Vector3(60, 0, 60)
+        },
+		acceleration: {
+            value: new THREE.Vector3(0, -10, 0),
+            spread: new THREE.Vector3( 10, 0, 10 )
+        },
+		velocity: {
+            value: new THREE.Vector3(0, -50, 0),
+            spread: new THREE.Vector3(0, 0, 0)
+        },
+        size: {
+            value: [4, 3]
+        },
+		particleCount: 30
+	});
+
+	// this.redParticleGroup.addEmitter(this.redParticleEmitter);
+	// this.greenParticleGroup.addEmitter(this.greenParticleEmitter);
+	this.blueParticleGroup.addEmitter(this.blueParticleEmitter);
+	// this.scene.add(this.redParticleGroup.mesh);
+	// this.scene.add(this.greenParticleGroup.mesh);
+	this.scene.add(this.blueParticleGroup.mesh);
+
+
+
+
+
+
+
+
+
+
+
+
+// this.redParticleGroup.tick(this.clock.getDelta());
+	// this.greenParticleGroup.tick(this.clock.getDelta());
+	this.blueParticleGroup.tick(this.clock.getDelta());
