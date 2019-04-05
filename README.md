@@ -1,6 +1,6 @@
-# voidMaze
+# void-maze
 
-![screenshot](https://raw.githubusercontent.com/thdoteo/voidMaze/master/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/thdoteo/void-maze/master/screenshot.png)
 
 A simple puzzle game made with Javascript with Three.js.  
 
